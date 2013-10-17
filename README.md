@@ -31,7 +31,7 @@ and add the alies also in the app.php config file in the 'aliases' array
 Usage
 -----
 
-$ContextIO = new ContextIO();
+	$ContextIO = new ContextIO();
 
-$ContextIO->listAccounts();
+	$ContextIO->listAccounts();
 
