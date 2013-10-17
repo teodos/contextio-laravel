@@ -3,7 +3,7 @@ Context.IO Laravel 4 Package
 
 Laravel 4 package built on top of the official PHP Library for Context.IO
 
-Original Library: https://github.com/dominikgehl
+Original Library: https://github.com/contextio/PHP-ContextIO
 
 Installation
 ------------
@@ -11,7 +11,7 @@ Installation
 Include the package in your composer file
 
     "require": {
-        "teddy/contextio-laravel": "dev-master"
+        "teddy/contextio": "dev-master"
     }
     
 

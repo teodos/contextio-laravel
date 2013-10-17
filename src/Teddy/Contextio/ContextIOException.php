@@ -3,7 +3,7 @@
 /*
 	Context.IO Laravel 4 package build on top of the PHP Library for Context.IO
 	
-	Original PHP Library for Context.IO => https://github.com/dominikgehl
+	Original PHP Library for Context.IO => https://github.com/contextio/PHP-ContextIO
 
 	@author Teddy, teddy@g6solutions.com
 */

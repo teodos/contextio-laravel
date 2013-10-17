@@ -3,7 +3,7 @@
 /*
   Context.IO Laravel 4 package build on top of the PHP Library for Context.IO
   
-  Original PHP Library for Context.IO => https://github.com/dominikgehl
+  Original PHP Library for Context.IO => https://github.com/contextio/PHP-ContextIO
 
   @author Teddy, teddy@g6solutions.com
 */
@@ -755,7 +755,7 @@ class OAuthDataStore {
 class OAuthUtil {
   public static function urlencode_rfc3986($input) {
   if (is_array($input)) {
-    return array_map(array('ContextIOExtLib\OAuthUtil', 'urlencode_rfc3986'), $input);
+    return array_map(array('\Teddy\Contextio\OAuthUtil', 'urlencode_rfc3986'), $input);
   } else if (is_scalar($input)) {
     return str_replace(
       '+',

@@ -3,7 +3,7 @@
 /*
 	Context.IO Laravel 4 package build on top of the PHP Library for Context.IO
 	
-	Original PHP Library for Context.IO => https://github.com/dominikgehl
+	Original PHP Library for Context.IO => https://github.com/contextio/PHP-ContextIO
 
 	@author Teddy, teddy@g6solutions.com
 */
@@ -81,8 +81,8 @@ class ContextIO {
 	* 
 	*/
 	private function loadConfig() {
-		$key 	= Config::get('contextio::key', '');
-		$secret = Config::get('contextio::secret', '');
+		$key 	= \Config::get('contextio::key', '');
+		$secret = \Config::get('contextio::secret', '');
 
 		if($key == '' or $secret == '') throw new ContextIOException("Invalid configuration");
 
@@ -370,10 +370,10 @@ class ContextIO {
 			}
 		}
 
-		$consumer = new ContextIOExtLib\OAuthConsumer($this->oauthKey, $this->oauthSecret);
+		$consumer = new OAuthConsumer($this->oauthKey, $this->oauthSecret);
 		$baseUrl = $this->build_url('accounts/' . $account . '/files/' . $params['file_id'] . '/content');
-		$req = ContextIOExtLib\OAuthRequest::from_consumer_and_token($consumer, null, "GET", $baseUrl);
-		$sig_method = new ContextIOExtLib\OAuthSignatureMethod_HMAC_SHA1();
+		$req = OAuthRequest::from_consumer_and_token($consumer, null, "GET", $baseUrl);
+		$sig_method = new OAuthSignatureMethod_HMAC_SHA1();
 		$req->sign_request($sig_method, $consumer, null);
 
 		//get data using signed url
@@ -725,10 +725,10 @@ class ContextIO {
 			throw new InvalidArgumentException('message_id, email_message_id or gmail_message_id is a required hash key');
 		}
 
-		$consumer = new ContextIOExtLib\OAuthConsumer($this->oauthKey, $this->oauthSecret);
+		$consumer = new OAuthConsumer($this->oauthKey, $this->oauthSecret);
 		$baseUrl = $this->build_url('accounts/' . $account . '/' . $url);
-		$req = ContextIOExtLib\OAuthRequest::from_consumer_and_token($consumer, null, "GET", $baseUrl);
-		$sig_method = new ContextIOExtLib\OAuthSignatureMethod_HMAC_SHA1();
+		$req = OAuthRequest::from_consumer_and_token($consumer, null, "GET", $baseUrl);
+		$sig_method = new OAuthSignatureMethod_HMAC_SHA1();
 		$req->sign_request($sig_method, $consumer, null);
 
 		//get data using signed url
@@ -1612,7 +1612,7 @@ class ContextIO {
 	}
 
 	protected function _doCall($httpMethod, $account, $action, $parameters=null, $file=null, $acceptableContentTypes=null, $httpHeadersToSet=array()) {
-		$consumer = new ContextIOExtLib\OAuthConsumer($this->oauthKey, $this->oauthSecret);
+		$consumer = new OAuthConsumer($this->oauthKey, $this->oauthSecret);
 		if (! is_null($account)) {
 			$action = 'accounts/' . $account . '/' . $action;
 			if (substr($action,-1) == '/') {
@@ -1660,14 +1660,14 @@ class ContextIO {
 
 		}
 
-		$req = ContextIOExtLib\OAuthRequest::from_consumer_and_token($consumer, null, $httpMethod, $baseUrl, $signatureParams);
-		$sig_method = new ContextIOExtLib\OAuthSignatureMethod_HMAC_SHA1();
+		$req = OAuthRequest::from_consumer_and_token($consumer, null, $httpMethod, $baseUrl, $signatureParams);
+		$sig_method = new OAuthSignatureMethod_HMAC_SHA1();
 		$req->sign_request($sig_method, $consumer, null);
 
 		//get data using signed url
 		if ($this->authHeaders) {
 			if ($httpMethod != 'POST') {
-				$curl = curl_init((is_null($parameters) || is_string($parameters) || (count($parameters) == 0)) ? $baseUrl : $baseUrl. '?' . ContextIOExtLib\OAuthUtil::build_http_query($parameters));
+				$curl = curl_init((is_null($parameters) || is_string($parameters) || (count($parameters) == 0)) ? $baseUrl : $baseUrl. '?' . OAuthUtil::build_http_query($parameters));
 			}
 			else {
 				$curl = curl_init($baseUrl);
